@@ -21,12 +21,13 @@ interface TaskFormProps {
 }
 
 export const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onClose }) => {
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    status: 'todo',
-    priority: 'medium',
-  });
+    const [formData, setFormData] = useState<Omit<Task, 'id' | 'createdAt' | 'updatedAt'>>({
+        title: '',
+        description: '',
+        status: 'todo' as 'todo' | 'in-progress' | 'completed',
+        priority: 'medium' as 'low' | 'medium' | 'high',
+      });
+    
 
   useEffect(() => {
     if (task) {

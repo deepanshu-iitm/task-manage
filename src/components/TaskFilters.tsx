@@ -39,7 +39,9 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
               displayEmpty
               onChange={(e) => onFilterChange({ status: e.target.value || null })}
             >
-              <MenuItem value="" disabled>All</MenuItem>
+              <MenuItem value="" disabled>
+                All
+              </MenuItem>
               <MenuItem value="todo">To Do</MenuItem>
               <MenuItem value="in-progress">In Progress</MenuItem>
               <MenuItem value="completed">Completed</MenuItem>
@@ -53,7 +55,11 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
               value={filters.priority || ''}
               label="Priority"
               displayEmpty
-              onChange={(e) => onFilterChange({ priority: e.target.value || null })}
+              onChange={(e) =>
+                onFilterChange({
+                  priority: e.target.value as 'low' | 'medium' | 'high' | null,
+                })
+              }
             >
               <MenuItem value="">All</MenuItem>
               <MenuItem value="low">Low</MenuItem>
@@ -68,7 +74,9 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
             <Select
               value={filters.sortBy}
               label="Sort By"
-              onChange={(e) => onFilterChange({ sortBy: e.target.value as 'date' | 'priority' })}
+              onChange={(e) =>
+                onFilterChange({ sortBy: e.target.value as 'date' | 'priority' })
+              }
             >
               <MenuItem value="date">Date</MenuItem>
               <MenuItem value="priority">Priority</MenuItem>
@@ -77,7 +85,9 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Button
-            onClick={() => onFilterChange({ sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })}
+            onClick={() =>
+              onFilterChange({ sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+            }
             variant="outlined"
             fullWidth
             sx={{ height: '56px' }}
