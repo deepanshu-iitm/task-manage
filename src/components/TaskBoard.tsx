@@ -80,7 +80,6 @@ export const TaskBoard: React.FC = () => {
           oldIndex, 
           newIndex
         );
-        const taskMap = new Map(tasks.map(task => [task.id, task]));
         
         const filteredTaskIds = new Set(filteredAndSortedTasks.map(task => task.id));
         
@@ -99,8 +98,12 @@ export const TaskBoard: React.FC = () => {
     dispatch(addTask(taskData));
   };
 
-  const handleUpdateTask = (taskData: Task) => {
-    dispatch(updateTask(taskData));
+  const handleUpdateTask = (
+    taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>
+  ) => {
+    if (editingTask) {
+      dispatch(updateTask({ ...editingTask, ...taskData }));
+    }
     setEditingTask(undefined);
   };
 
